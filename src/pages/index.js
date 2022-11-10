@@ -5,28 +5,40 @@ import Welcome from '../components/Welcome';
 
 const Home = () => {
 
-  //const [ firstName, setFirstName ] = useState('');
-  //const [ lastName, setLastName ] = useState('');
-  //const [ email, setEmail ] = useState('');
-  const [ information, setInformation ] = useState({
-    firstName: "",
-    lastName: "",
-    email: ""
-  })
+  const [ firstName, setFirstName ] = useState('');
+  const [ lastName, setLastName ] = useState('');
+  const [ email, setEmail ] = useState('');
+  let values = [
+    firstName,
+    lastName,
+    email
+  ]
   
+  /*
   const onSubmit = (e) => {
     document.getElementsByClassName('submit').addEventListener("click", (e) => {
       e.preventDefault();
     });
   }
+  */
+  const handleChange = (e) => {
+    const setField = {
+      setFirstName,
+      setLastName,
+      setEmail
+    };
+    setField["Hi" + e.target.name](e.target.value);
+  }
 
+  /*
   const handleChange = (e) => {
     e.preventDefault();
     const { name,value } = e.target;
-    setInformation((prev) => {
+    setValues((prev) => {
       return {...prev, [name]: value};
     });
   }
+  */
 
   /*
   const handleFirstNameChange = (e) => {
@@ -42,18 +54,20 @@ const Home = () => {
 
   return (
     <div className={style['root']}>
-      <Signup 
-      onSubmit={onSubmit} 
-      firstName={information.firstName}
-      lastName={information.lastName} 
-      email={information.email} 
+      <Signup  
+      /**
+      firstName={values.firstName}
+      lastName={values.lastName} 
+      email={values.email} 
       handleChange={handleChange}
+      */
+      handleChange={handleChange}
+      values={values}
       />
       <Welcome 
-      firstName={information.firstName} 
-      lastName={information.lastName} 
-      email={information.email}
-      handleChange={handleChange}
+      firstName={values.firstName} 
+      lastName={values.lastName} 
+      email={values.email}
       />
     </div>
   )
