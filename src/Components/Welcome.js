@@ -8,8 +8,7 @@ const Welcome = (props) => {
     <div className={style['root']}>
       {
         (isEntered === true) ? (
-          <div>
-            <h1>Welcome!</h1>
+          <div className={style['profile']}>
             <div>
               <div>Hello {firstName}</div>
               <div>{lastName}</div>
@@ -17,7 +16,7 @@ const Welcome = (props) => {
             </div>
           </div>
         ) : (
-          <div>
+          <div className='initial-msg'>
             Your Profile will appear here once submitted
           </div>
         )

@@ -7,6 +7,8 @@ const Signup = (props) => {
     handleFirstNameChange,
     handleLastNameChange,
     handleEmailChange,
+    handleReset,
+    isEntered,
     firstName,
     lastName,
     email
@@ -44,6 +46,12 @@ const Signup = (props) => {
             />
           </div>
           <button className={style['btn']} type="submit">Submit</button>
+          { (isEntered === true) ? (
+            <div>
+              <button onClick={handleReset}>Reset</button>
+            </div>
+            ) : <div></div>
+          }
         </form>
       </div>
     </div>

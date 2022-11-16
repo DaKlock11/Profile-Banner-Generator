@@ -27,6 +27,15 @@ const Home = () => {
     setEmail(e.target.value);
   }
 
+  const handleReset = (e) => {
+    e.preventDefault();
+
+    setIsEntered(false)
+    setFirstName('')
+    setLastName('')
+    setEmail('')
+  }
+
   return (
     <div className={style['root']}>
       <Signup  
@@ -34,17 +43,22 @@ const Home = () => {
       handleLastNameChange={handleLastNameChange}
       handleEmailChange={handleEmailChange}
       onSubmit={onSubmit}
-      firstName={firstName}
-      lastName={lastName}
-      email={email}
-      />
-      <Welcome 
-      firstName={firstName}
-      lastName={lastName}
-      email={email}
-      onSubmit={onSubmit}
       isEntered={isEntered}
+      firstName={firstName}
+      lastName={lastName}
+      email={email}
+      handleReset={handleReset}
       />
+      <div className='welcome-container'>
+        <Welcome 
+        className={style['welcome']}
+        firstName={firstName}
+        lastName={lastName}
+        email={email}
+        onSubmit={onSubmit}
+        isEntered={isEntered}
+        />
+      </div>
     </div>
   )
 }
