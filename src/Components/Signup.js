@@ -3,9 +3,13 @@ import style from './Signup.module.scss';
 
 const Signup = (props) => {
   const { 
-    handleChange,
-    values,
-    onSubmit 
+    onSubmit,
+    handleFirstNameChange,
+    handleLastNameChange,
+    handleEmailChange,
+    firstName,
+    lastName,
+    email
   } = props;
 
   return (
@@ -13,31 +17,33 @@ const Signup = (props) => {
       <div>
         <form 
         className={style['form']} 
-        onSubmit={(e) => e.preventDefault()}
-        onChange={handleChange}
+        onSubmit={onSubmit}
         >
           <div className={style['parent']}>
             <header className={style['header']}>Fill out this form to sign up for a profile</header>
             <input 
-            placeholder={values.firstName}
+            placeholder="First Name"
             className={style['firstName']}
             type="text"
-            minLength={2}
+            value={firstName}
+            onChange={handleFirstNameChange}
             />
             <input 
-            placeholder={values.lastName}
+            placeholder="Last Name"
             className={style['lastName']}
             type="text"
-            minLength={2}
+            value={lastName}
+            onChange={handleLastNameChange}
             />
             <input 
-            placeholder={values.email}
+            placeholder="Email"
             className={style['email']}
             type="text"
-            minLength={8}
+            value={email}
+            onChange={handleEmailChange}
             />
           </div>
-          <button className={style['btn']} onSubmit={onSubmit}>Submit</button>
+          <button className={style['btn']} type="submit">Submit</button>
         </form>
       </div>
     </div>
