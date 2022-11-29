@@ -1,10 +1,20 @@
 .root {
-  background-color: rgb(181, 180, 180);
-  width: 50%;
+  background-color: rgba(235, 225, 169, 0.551);
   display: flex;
   justify-content: center;
+  padding: 3vh 0;
 }
 .initial-msg {
   display: flex;
   justify-content: center;
+  margin: 50px 0;
 }
+.parent {
+  display: flex;
+  flex-direction: column;
+
+  .child {
+    padding: 1vh 0;
+  }
+}
+

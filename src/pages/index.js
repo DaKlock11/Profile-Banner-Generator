@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, listObjects } from 'react';
 import style from '../page_style/index.module.scss';
 import Signup from '../components/Signup';
 import Welcome from '../components/Welcome';
@@ -8,6 +8,8 @@ const Home = () => {
   const [ firstName, setFirstName ] = useState('');
   const [ lastName, setLastName ] = useState('');
   const [ email, setEmail ] = useState('');
+  const [ photo, setPhoto ] = useState([]);
+  const [ birthday, setBirthday ] = useState('');
   const [ isEntered, setIsEntered ] = useState(false);
   
   const onSubmit = (e) => {
@@ -27,6 +29,26 @@ const Home = () => {
     setEmail(e.target.value);
   }
 
+  const handleBirthdayChange = (e) => {
+    e.preventDefault();
+    setBirthday(e.target.value);
+  }
+
+  /*
+  const handlePicture = (pics) => {
+    handlePicture('http://url/to/the/endpoint').then((data) => {
+      return data.forEach((picture) => {
+        setPhoto((photo) => [...photo, picture.key])
+      })
+    })
+  }
+  
+  useEffect(() => {
+    const pictures = listObjects()
+    handlePicture(pictures)
+  }, [])
+  */
+
   const handleReset = (e) => {
     e.preventDefault();
 
@@ -42,11 +64,15 @@ const Home = () => {
       handleFirstNameChange={handleFirstNameChange}
       handleLastNameChange={handleLastNameChange}
       handleEmailChange={handleEmailChange}
+      //handlePicture={handlePicture}
+      handleBirthdayChange={handleBirthdayChange}
       onSubmit={onSubmit}
       isEntered={isEntered}
       firstName={firstName}
       lastName={lastName}
       email={email}
+      birthday={birthday}
+      photo={photo}
       handleReset={handleReset}
       />
       <div className='welcome-container'>
@@ -55,6 +81,8 @@ const Home = () => {
         firstName={firstName}
         lastName={lastName}
         email={email}
+        birthday={birthday}
+        photo={photo}
         onSubmit={onSubmit}
         isEntered={isEntered}
         />

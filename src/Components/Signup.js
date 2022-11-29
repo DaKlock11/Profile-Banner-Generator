@@ -7,11 +7,15 @@ const Signup = (props) => {
     handleFirstNameChange,
     handleLastNameChange,
     handleEmailChange,
+    handlePicture,
+    handleBirthdayChange,
     handleReset,
     isEntered,
     firstName,
     lastName,
-    email
+    email,
+    photo,
+    birthday
   } = props;
 
   return (
@@ -44,6 +48,25 @@ const Signup = (props) => {
             value={email}
             onChange={handleEmailChange}
             />
+            <input 
+            className={style['date']}
+            type="date"
+            onChange={handleBirthdayChange}
+            value={birthday}
+            />
+            <div>
+              <div className={style['img-parent']}>
+                <span>Upload a default profile image</span>
+                <input 
+                type="file"
+                onChange={handlePicture}
+                value={photo}
+                />
+              </div>
+              <div>
+
+              </div>
+            </div>
           </div>
           <button className={style['btn']} type="submit">Submit</button>
           { (isEntered === true) ? (

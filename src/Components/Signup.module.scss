@@ -2,7 +2,7 @@
   display: block;
 }
 .form {
-  background-color: lightcyan;
+  background-color: rgb(158, 181, 181);
   padding: 2vw 0;
 }
 .header {
@@ -23,3 +23,19 @@
 .email {
   margin: 5px 0;
 }
+.img-parent {
+  margin: 2vh 0;
+  display: flex;
+  flex-direction: column;
+
+  span {
+    display: flex;
+    align-items: flex-start;
+    padding: 2vh 0;
+  }
+  input {
+    display: flex;
+  }
+  
+}
+
