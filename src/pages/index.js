@@ -1,4 +1,4 @@
-import React, { useEffect, useState, listObjects } from 'react';
+import React, { useState } from 'react';
 import style from '../page_style/index.module.scss';
 import Signup from '../components/Signup';
 import Welcome from '../components/Welcome';
@@ -35,26 +35,11 @@ const Home = () => {
     setBirthday(e.target.value);
   }
 
-  
   const handlePicture = (e) => {
     console.log(e.target.files[0]);
     setPhoto(URL.createObjectURL(e.target.files[0]));
     console.log(photo);
-    /*
-    handlePicture('http://url/to/the/endpoint').then((data) => {
-      return data.forEach((picture) => {
-        setPhoto((photo) => [...photo, picture.key])
-      })
-    })
-    */
   }
-  /*
-  useEffect(() => {
-    const pictures = listObjects()
-    handlePicture(pictures)
-  }, [])
-  */
-  //commented out code
 
   const handleReset = (e) => {
     e.preventDefault();

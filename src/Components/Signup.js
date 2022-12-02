@@ -14,7 +14,6 @@ const Signup = (props) => {
     firstName,
     lastName,
     email,
-    photo,
     birthday
   } = props;
 
@@ -26,7 +25,7 @@ const Signup = (props) => {
         onSubmit={onSubmit}
         >
           <div className={style['parent']}>
-            <header className={style['header']}>Fill out this form to sign up for a profile</header>
+            <header className={style['header']}>Complete this form to sign up</header>
             <input 
             placeholder="First Name"
             className={style['firstName']}
