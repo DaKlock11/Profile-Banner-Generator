@@ -60,7 +60,7 @@ const Signup = (props) => {
                 <input 
                 type="file"
                 onChange={handlePicture}
-                value={photo}
+                //value={photo}
                 />
               </div>
               <div>

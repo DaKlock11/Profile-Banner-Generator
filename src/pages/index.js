@@ -8,7 +8,7 @@ const Home = () => {
   const [ firstName, setFirstName ] = useState('');
   const [ lastName, setLastName ] = useState('');
   const [ email, setEmail ] = useState('');
-  const [ photo, setPhoto ] = useState([]);
+  const [ photo, setPhoto ] = useState('');
   const [ birthday, setBirthday ] = useState('');
   const [ isEntered, setIsEntered ] = useState(false);
   
@@ -31,23 +31,30 @@ const Home = () => {
 
   const handleBirthdayChange = (e) => {
     e.preventDefault();
+    
     setBirthday(e.target.value);
   }
 
-  /*
-  const handlePicture = (pics) => {
+  
+  const handlePicture = (e) => {
+    console.log(e.target.files[0]);
+    setPhoto(URL.createObjectURL(e.target.files[0]));
+    console.log(photo);
+    /*
     handlePicture('http://url/to/the/endpoint').then((data) => {
       return data.forEach((picture) => {
         setPhoto((photo) => [...photo, picture.key])
       })
     })
+    */
   }
-  
+  /*
   useEffect(() => {
     const pictures = listObjects()
     handlePicture(pictures)
   }, [])
   */
+  //commented out code
 
   const handleReset = (e) => {
     e.preventDefault();
@@ -56,6 +63,8 @@ const Home = () => {
     setFirstName('')
     setLastName('')
     setEmail('')
+    setBirthday('')
+    setPhoto('')
   }
 
   return (
@@ -64,7 +73,7 @@ const Home = () => {
       handleFirstNameChange={handleFirstNameChange}
       handleLastNameChange={handleLastNameChange}
       handleEmailChange={handleEmailChange}
-      //handlePicture={handlePicture}
+      handlePicture={handlePicture}
       handleBirthdayChange={handleBirthdayChange}
       onSubmit={onSubmit}
       isEntered={isEntered}

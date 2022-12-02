@@ -13,7 +13,7 @@ const Welcome = (props) => {
               <div className={style['child']}>Hello {firstName} {lastName}</div>
               <div className={style['child']}>{email}</div>
               <div>{birthday}</div>
-              <image>{photo}</image>
+              <img src={photo} alt="default" />
             </div>
           </div>
         ) : (
