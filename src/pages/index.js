@@ -9,7 +9,7 @@ const Home = () => {
   const [ lastName, setLastName ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ photo, setPhoto ] = useState('');
-  const [ birthday, setBirthday ] = useState('');
+  const [ birthday, setBirthday ] = useState(''); 
   const [ isEntered, setIsEntered ] = useState(false);
   
   const onSubmit = (e) => {
