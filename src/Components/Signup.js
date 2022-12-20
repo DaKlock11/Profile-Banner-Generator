@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './Signup.module.scss';
 
+
 const Signup = (props) => {
   const { 
     onSubmit,
@@ -8,13 +9,19 @@ const Signup = (props) => {
     handleLastNameChange,
     handleEmailChange,
     handlePicture,
+    handleLocation,
+    handleOccupation,
     handleBirthdayChange,
+    handleSubmitDisabled,
     handleReset,
     isEntered,
     firstName,
     lastName,
     email,
-    birthday
+    birthday,
+    city,
+    occupation,
+    submitDisabled
   } = props;
 
   return (
@@ -32,6 +39,7 @@ const Signup = (props) => {
             type="text"
             value={firstName}
             onChange={handleFirstNameChange}
+            required
             />
             <input 
             placeholder="Last Name"
@@ -39,13 +47,17 @@ const Signup = (props) => {
             type="text"
             value={lastName}
             onChange={handleLastNameChange}
+            required
             />
             <input 
             placeholder="Email"
             className={style['email']}
-            type="text"
+            type="email"
+            id="mail"
+            name="mail"
             value={email}
             onChange={handleEmailChange}
+            required
             />
             <input 
             className={style['date']}
@@ -53,13 +65,26 @@ const Signup = (props) => {
             onChange={handleBirthdayChange}
             value={birthday}
             />
+            <input 
+            placeholder='Occupation'
+            className={style['occupation']}
+            type="text"
+            onChange={handleOccupation}
+            value={occupation}
+            />
+            <input 
+            placeholder='Enter closest major city to where you reside'
+            className={style['location']}
+            type="text"
+            onChange={handleLocation}
+            value={city}
+            />
             <div>
               <div className={style['img-parent']}>
                 <span>Upload a default profile image</span>
                 <input 
                 type="file"
                 onChange={handlePicture}
-                //value={photo}
                 />
               </div>
               <div>
@@ -67,12 +92,13 @@ const Signup = (props) => {
               </div>
             </div>
           </div>
-          <button className={style['btn']} type="submit">Submit</button>
-          { (isEntered === true) ? (
+          { (isEntered === false) ? (
+            <button className={style['btn']} disabled={handleSubmitDisabled} type="submit">Submit</button>
+          ) : (isEntered === true) ? (
             <div>
               <button onClick={handleReset}>Reset</button>
             </div>
-            ) : <div></div>
+          ) : <div></div>
           }
         </form>
       </div>

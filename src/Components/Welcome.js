@@ -2,7 +2,7 @@ import React from 'react';
 import style from './Welcome.module.scss';
 
 const Welcome = (props) => {
-  const { firstName, lastName, email, isEntered, photo, birthday } = props;
+  const { firstName, lastName, email, isEntered, photo, birthday, city, occupation } = props;
 
   return (
     <div className={style['root']}>
@@ -12,8 +12,10 @@ const Welcome = (props) => {
             <div className={style['parent']}>
               <div className={style['child']}>Hello {firstName} {lastName}</div>
               <div className={style['child']}>{email}</div>
-              <div>{birthday}</div>
-              <img src={photo} alt="default" />
+              <div className={style['child']}>{city}</div>
+              <div className={style['child']}>{birthday}</div>
+              <div className={style['child']}>{occupation}</div>
+              <img width='50px' height='50px' src={photo} alt="default" />
             </div>
           </div>
         ) : (
