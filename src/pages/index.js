@@ -1,10 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer, useCallback } from 'react';
 import style from '../page_style/index.module.scss';
 import Signup from '../components/Signup';
 import Welcome from '../components/Welcome';
+//Use this as inspiration: https://www.linkedin.com/in/benjunya
+
+function reducer (state, action) {
+  switch(action.type) {
+    case 'ON_FIELD_CHANGE': {
+      const { name, value } = action;
+      return {
+        ...state,
+        [name]: value
+      };
+    }
+
+    default: {
+      return state;
+    }
+  }
+}
+
+const initialState = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  photo: '',
+  birthday: '',
+  occupation: '',
+  city: '',
+  isEntered: false,
+  submitDisabled: true
+}
 
 const Home = () => {
-
+  // 1. REFACTOR TO USE useReducer()
+  // 2. Separate form state and fully rendered state into their own instance
+  /*
   const [ firstName, setFirstName ] = useState('');
   const [ lastName, setLastName ] = useState('');
   const [ email, setEmail ] = useState('');
@@ -14,7 +45,19 @@ const Home = () => {
   const [ city, setCity ] = useState('');
   const [ isEntered, setIsEntered ] = useState(false);
   const [ submitDisabled, setSubmitDisabled ] = useState(true);
+  */
+  const [ dispatch, state ] = useReducer(reducer, initialState);
   
+  const onFieldNameChange = e => {
+    const { value, name } = e.currentTarget;
+    dispatch({
+      type: 'ON_FIELD_CHANGE',
+      value,
+      name
+    });
+  };
+  
+  /*
   const onSubmit = (e) => {
     e.preventDefault();
     setIsEntered(true);
@@ -63,27 +106,27 @@ const Home = () => {
     setCity('')
     setPhoto('')
   }
-
+  */
   const handleSubmitDisabled = () => {
     if (
-      firstName.length < 1 || 
-      lastName.length < 1 || 
-      email.length < 6 || 
-      birthday.length < 10 || 
-      photo.length < 1 || 
-      occupation.length < 1 || 
-      city.length < 3
+      state.firstName.length < 1 || 
+      state.lastName.length < 1 || 
+      state.email.length < 6 || 
+      state.birthday.length < 10 || 
+      state.photo.length < 1 || 
+      state.occupation.length < 1 || 
+      state.city.length < 3
       ) {
-        setSubmitDisabled(true);
+        state.SubmitDisabled(true);
     }
   }
-
+  /*
   const success = () => {
     if (document.getElementsById("mail").value === '') {
-      
+
     }
   }
-
+  */
   return (
     <div className={style['root']}>
       <Signup  
@@ -96,29 +139,30 @@ const Home = () => {
       handleBirthdayChange={handleBirthdayChange}
       handleSubmitDisabled={handleSubmitDisabled}
       onSubmit={onSubmit}
-      isEntered={isEntered}
-      firstName={firstName}
-      lastName={lastName}
-      email={email}
-      birthday={birthday}
-      city={city}
-      occupation={occupation}
-      photo={photo}
+      onFieldNameChange={onFieldNameChange}
+      isEntered={state.isEntered}
+      firstName={state.firstName}
+      lastName={state.lastName}
+      email={state.email}
+      birthday={state.birthday}
+      city={state.city}
+      occupation={state.occupation}
+      photo={state.photo}
       handleReset={handleReset}
       submitDisabled={submitDisabled}
       />
       <div className='welcome-container'>
         <Welcome 
         className={style['welcome']}
-        firstName={firstName}
-        lastName={lastName}
-        email={email}
-        birthday={birthday}
-        photo={photo}
-        onSubmit={onSubmit}
-        isEntered={isEntered}
-        city={city}
-        occupation={occupation}
+        firstName={state.firstName}
+        lastName={state.lastName}
+        email={state.email}
+        birthday={state.birthday}
+        photo={state.photo}
+        onSubmit={state.onSubmit}
+        isEntered={state.isEntered}
+        city={state.city}
+        occupation={state.occupation}
         />
       </div>
     </div>

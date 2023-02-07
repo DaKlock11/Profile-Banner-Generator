@@ -14,6 +14,7 @@ const Signup = (props) => {
     handleBirthdayChange,
     handleSubmitDisabled,
     handleReset,
+    onFieldNameChange,
     isEntered,
     firstName,
     lastName,
@@ -21,7 +22,7 @@ const Signup = (props) => {
     birthday,
     city,
     occupation,
-    submitDisabled
+    //submitDisabled
   } = props;
 
   return (
@@ -38,7 +39,7 @@ const Signup = (props) => {
             className={style['firstName']}
             type="text"
             value={firstName}
-            onChange={handleFirstNameChange}
+            onChange={onFieldNameChange}
             required
             />
             <input 
@@ -46,7 +47,7 @@ const Signup = (props) => {
             className={style['lastName']}
             type="text"
             value={lastName}
-            onChange={handleLastNameChange}
+            onChange={onFieldNameChange}
             required
             />
             <input 
@@ -56,27 +57,28 @@ const Signup = (props) => {
             id="mail"
             name="mail"
             value={email}
-            onChange={handleEmailChange}
+            onChange={onFieldNameChange}
             required
             />
             <input 
             className={style['date']}
             type="date"
-            onChange={handleBirthdayChange}
+            onChange={onFieldNameChange}
             value={birthday}
             />
             <input 
             placeholder='Occupation'
             className={style['occupation']}
             type="text"
-            onChange={handleOccupation}
+            onChange={onFieldNameChange}
             value={occupation}
+            required
             />
             <input 
             placeholder='Enter closest major city to where you reside'
             className={style['location']}
             type="text"
-            onChange={handleLocation}
+            onChange={onFieldNameChange}
             value={city}
             />
             <div>
