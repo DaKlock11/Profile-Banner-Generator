@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useReducer} from 'react';
 import style from './Signup.module.scss';
-
+import { initialState, reducer } from '../state/formReducer';
 
 const Signup = (props) => {
   const { 
@@ -15,7 +15,8 @@ const Signup = (props) => {
     birthday,
     city,
     occupation,
-    //dispatch,
+    reducerState,
+    dispatch
     //submitDisabled
   } = props;
 
@@ -30,62 +31,97 @@ const Signup = (props) => {
             <header className={style['header']}>Complete this form to sign up</header>
             <input 
               className={style['firstName']}
+              id="firstName"
               name='firstName'
-              onChange={e => {onFieldNameChange("name", e.target.value)}}
+              onChange={e => dispatch({
+                type: 'ON_FIELD_CHANGE',
+                value: e.target.value,
+                key: reducerState.firstName,
+                })
+              }
               placeholder="First Name"
-              required
               type="text"
               value={firstName}
+              //required
             />
             <input 
               className={style['lastName']}
+              id="lastName"
               name='lastName'
-              onChange={e => {onFieldNameChange("name", e.target.value)}}
+              onChange={e => dispatch({
+                type: 'ON_FIELD_CHANGE',
+                value: e.target.value,
+                key: reducerState.lastName,
+                })
+              }
               placeholder="Last Name"
-              required
               type="text"
               value={lastName}
+              //required
             />
             <input 
-              placeholder="Email"
               className={style['email']}
-              type="email"
               id="mail"
               name="email"
+              onChange={e => dispatch({
+                type: 'ON_FIELD_CHANGE',
+                value: e.target.value,
+                key: reducerState.email,
+                })
+              }
+              placeholder="Email"
+              type="email"
               value={email}
-              onChange={e => {onFieldNameChange("name", e.target.value)}}
-              required
+              //required
             />
             <input 
               className={style['date']}
-              type="date"
+              id="birthday"
               name='birthday'
-              onChange={e => {onFieldNameChange("name", e.target.value)}}
+              onChange={e => dispatch({
+                type: 'ON_FIELD_CHANGE',
+                value: e.target.value,
+                key: reducerState.birthday,
+                })
+              }
+              type="date"
               value={birthday}
             />
             <input 
-            placeholder='Occupation'
-            className={style['occupation']}
-            type="text"
-            name='occupation'
-            onChange={e => {onFieldNameChange("name", e.target.value)}}
-            value={occupation}
-            required
+              className={style['occupation']}
+              id="occupation"
+              name='occupation'
+              onChange={e => dispatch({
+                type: 'ON_FIELD_CHANGE',
+                value: e.target.value,
+                key: reducerState.occupation,
+                })
+              }
+              placeholder='Occupation'
+              type="text"
+              value={occupation}
+              //required
             />
             <input 
-            placeholder='Enter closest major city to where you reside'
-            className={style['location']}
-            type="text"
-            name='location'
-            onChange={e => {onFieldNameChange("name", e.target.value)}}
-            value={city}
+              className={style['location']}
+              id="city"
+              name='city'
+              onChange={e => dispatch({
+                type: 'ON_FIELD_CHANGE',
+                value: e.target.value,
+                key: reducerState.city,
+                })
+              }
+              placeholder='Enter closest major city'
+              type="text"
+              value={city}
             />
             <div>
               <div className={style['img-parent']}>
                 <span>Upload a default profile image</span>
                 <input 
+                onChange={e => {onFieldNameChange(e)}}
                 type="file"
-                onChange={e => {onFieldNameChange("name", e.target.value)}}
                 />
               </div>
               <div>
@@ -94,7 +130,13 @@ const Signup = (props) => {
             </div>
           </div>
           { (isEntered === false) ? (
-            <button className={style['btn']} disabled={handleSubmitDisabled} type="submit">Submit</button>
+            <button 
+            className={style['btn']} 
+            //disabled={handleSubmitDisabled} 
+            type="submit"
+            >
+              Submit
+            </button>
           ) : (isEntered === true) ? (
             <div>
               <button onClick={handleReset}>Reset</button>

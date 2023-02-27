@@ -2,40 +2,14 @@ import React, { useReducer } from 'react';
 import style from '../page_style/index.module.scss';
 import Signup from '../components/Signup';
 import Welcome from '../components/Welcome';
+import { initialState, reducer } from '../state/formReducer';
 //Use this as inspiration: https://www.linkedin.com/in/benjunya
-
-function reducer (state, action) {
-  switch(action.type) {
-    case 'ON_FIELD_CHANGE': {
-      const { name, value } = action;
-      return {
-        ...state,
-        [name]: value
-      };
-    }
-    default: {
-      return state;
-    }
-  }
-}
-
-const initialState = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  photo: '',
-  birthday: '',
-  occupation: '',
-  city: '',
-  isEntered: false,
-  submitDisabled: true
-}
 
 const Home = () => {
   // 1. REFACTOR TO USE useReducer()
   // 2. Separate form state and fully rendered state into their own instance
   
-  const [ state, dispatch ] = useReducer(reducer, initialState);
+  const [ reducerState, dispatch ] = useReducer(reducer, initialState);
   
 
   const onFieldNameChange = e => {
@@ -51,49 +25,50 @@ const Home = () => {
   
   const handleSubmitDisabled = () => {
     if (
-      state.firstName.length < 1 || 
-      state.lastName.length < 1 || 
-      state.email.length < 6 || 
-      state.birthday.length < 10 || 
-      state.photo.length < 1 || 
-      state.occupation.length < 1 || 
-      state.city.length < 3
+      reducerState.firstName.length < 1 || 
+      reducerState.lastName.length < 1 || 
+      reducerState.email.length < 6 || 
+      reducerState.birthday.length < 10 || 
+      reducerState.photo.length < 1 || 
+      reducerState.occupation.length < 1 || 
+      reducerState.city.length < 3
       ) {
-        state.SubmitDisabled(true);
+        reducerState.SubmitDisabled(true);
     }
   }
-
+  /*
   const list = document.getElementById('list');
   console.log(list.dataset.thing); // thing
   console.log(list.dataset.occupation); // programmer
   console.log(list.getAttribute('data-occupation')); // programmer
+  */
   return (
     <div className={style['root']}>
-      <div>hello</div>
       <Signup  
       onFieldNameChange={onFieldNameChange}
-      isEntered={state.isEntered}
-      firstName={state.firstName}
-      lastName={state.lastName}
-      email={state.email}
-      birthday={state.birthday}
-      city={state.city}
-      occupation={state.occupation}
-      photo={state.photo}
-      //state={state}
+      isEntered={reducerState.isEntered}
+      firstName={reducerState.firstName}
+      lastName={reducerState.lastName}
+      email={reducerState.email}
+      birthday={reducerState.birthday}
+      city={reducerState.city}
+      occupation={reducerState.occupation}
+      photo={reducerState.photo}
+      reducerState={reducerState}
+      dispatch={dispatch}
       />
       <div className='welcome-container'>
         <Welcome 
         className={style['welcome']}
-        firstName={state.firstName}
-        lastName={state.lastName}
-        email={state.email}
-        birthday={state.birthday}
-        photo={state.photo}
-        onSubmit={state.onSubmit}
-        isEntered={state.isEntered}
-        city={state.city}
-        occupation={state.occupation}
+        firstName={reducerState.firstName}
+        lastName={reducerState.lastName}
+        email={reducerState.email}
+        birthday={reducerState.birthday}
+        photo={reducerState.photo}
+        onSubmit={reducerState.onSubmit}
+        isEntered={reducerState.isEntered}
+        city={reducerState.city}
+        occupation={reducerState.occupation}
         />
       </div>
     </div>
