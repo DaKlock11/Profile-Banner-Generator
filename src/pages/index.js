@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useCallback } from 'react';
+import React, { useReducer } from 'react';
 import style from '../page_style/index.module.scss';
 import Signup from '../components/Signup';
 import Welcome from '../components/Welcome';
@@ -13,7 +13,6 @@ function reducer (state, action) {
         [name]: value
       };
     }
-
     default: {
       return state;
     }
@@ -35,19 +34,10 @@ const initialState = {
 const Home = () => {
   // 1. REFACTOR TO USE useReducer()
   // 2. Separate form state and fully rendered state into their own instance
-  /*
-  const [ firstName, setFirstName ] = useState('');
-  const [ lastName, setLastName ] = useState('');
-  const [ email, setEmail ] = useState('');
-  const [ photo, setPhoto ] = useState('');
-  const [ birthday, setBirthday ] = useState(''); 
-  const [ occupation, setOccupation ] = useState('');
-  const [ city, setCity ] = useState('');
-  const [ isEntered, setIsEntered ] = useState(false);
-  const [ submitDisabled, setSubmitDisabled ] = useState(true);
-  */
-  const [ dispatch, state ] = useReducer(reducer, initialState);
   
+  const [ state, dispatch ] = useReducer(reducer, initialState);
+  
+
   const onFieldNameChange = e => {
     const { value, name } = e.currentTarget;
     dispatch({
@@ -55,58 +45,10 @@ const Home = () => {
       value,
       name
     });
+    console.log(value)
+    console.log(name) 
   };
   
-  /*
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setIsEntered(true);
-  };
-
-  const handleFirstNameChange = (e) => {
-    setFirstName(e.target.value);
-  };
-
-  const handleLastNameChange = (e) => {
-    setLastName(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  }
-
-  const handleBirthdayChange = (e) => {
-    e.preventDefault();
-    
-    setBirthday(e.target.value);
-  }
-
-  const handleOccupation = (e) => {
-    setOccupation(e.target.value);
-  }
-
-  const handleLocation = (e) => {
-    setCity(e.target.value)
-  }
-
-  const handlePicture = (e) => {
-    console.log(e.target.files[0]);
-    setPhoto(URL.createObjectURL(e.target.files[0]));
-    console.log(photo);
-  }
-
-  const handleReset = (e) => {
-    e.preventDefault();
-
-    setIsEntered(false)
-    setFirstName('')
-    setLastName('')
-    setEmail('')
-    setBirthday('')
-    setCity('')
-    setPhoto('')
-  }
-  */
   const handleSubmitDisabled = () => {
     if (
       state.firstName.length < 1 || 
@@ -120,25 +62,15 @@ const Home = () => {
         state.SubmitDisabled(true);
     }
   }
-  /*
-  const success = () => {
-    if (document.getElementsById("mail").value === '') {
 
-    }
-  }
-  */
+  const list = document.getElementById('list');
+  console.log(list.dataset.thing); // thing
+  console.log(list.dataset.occupation); // programmer
+  console.log(list.getAttribute('data-occupation')); // programmer
   return (
     <div className={style['root']}>
+      <div>hello</div>
       <Signup  
-      handleFirstNameChange={handleFirstNameChange}
-      handleLastNameChange={handleLastNameChange}
-      handleEmailChange={handleEmailChange}
-      handlePicture={handlePicture}
-      handleLocation={handleLocation}
-      handleOccupation={handleOccupation}
-      handleBirthdayChange={handleBirthdayChange}
-      handleSubmitDisabled={handleSubmitDisabled}
-      onSubmit={onSubmit}
       onFieldNameChange={onFieldNameChange}
       isEntered={state.isEntered}
       firstName={state.firstName}
@@ -148,8 +80,7 @@ const Home = () => {
       city={state.city}
       occupation={state.occupation}
       photo={state.photo}
-      handleReset={handleReset}
-      submitDisabled={submitDisabled}
+      //state={state}
       />
       <div className='welcome-container'>
         <Welcome 

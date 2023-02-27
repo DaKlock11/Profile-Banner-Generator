@@ -5,13 +5,6 @@ import style from './Signup.module.scss';
 const Signup = (props) => {
   const { 
     onSubmit,
-    handleFirstNameChange,
-    handleLastNameChange,
-    handleEmailChange,
-    handlePicture,
-    handleLocation,
-    handleOccupation,
-    handleBirthdayChange,
     handleSubmitDisabled,
     handleReset,
     onFieldNameChange,
@@ -22,6 +15,7 @@ const Signup = (props) => {
     birthday,
     city,
     occupation,
+    //dispatch,
     //submitDisabled
   } = props;
 
@@ -35,42 +29,46 @@ const Signup = (props) => {
           <div className={style['parent']}>
             <header className={style['header']}>Complete this form to sign up</header>
             <input 
-            placeholder="First Name"
-            className={style['firstName']}
-            type="text"
-            value={firstName}
-            onChange={onFieldNameChange}
-            required
+              className={style['firstName']}
+              name='firstName'
+              onChange={e => {onFieldNameChange("name", e.target.value)}}
+              placeholder="First Name"
+              required
+              type="text"
+              value={firstName}
             />
             <input 
-            placeholder="Last Name"
-            className={style['lastName']}
-            type="text"
-            value={lastName}
-            onChange={onFieldNameChange}
-            required
+              className={style['lastName']}
+              name='lastName'
+              onChange={e => {onFieldNameChange("name", e.target.value)}}
+              placeholder="Last Name"
+              required
+              type="text"
+              value={lastName}
             />
             <input 
-            placeholder="Email"
-            className={style['email']}
-            type="email"
-            id="mail"
-            name="mail"
-            value={email}
-            onChange={onFieldNameChange}
-            required
+              placeholder="Email"
+              className={style['email']}
+              type="email"
+              id="mail"
+              name="email"
+              value={email}
+              onChange={e => {onFieldNameChange("name", e.target.value)}}
+              required
             />
             <input 
-            className={style['date']}
-            type="date"
-            onChange={onFieldNameChange}
-            value={birthday}
+              className={style['date']}
+              type="date"
+              name='birthday'
+              onChange={e => {onFieldNameChange("name", e.target.value)}}
+              value={birthday}
             />
             <input 
             placeholder='Occupation'
             className={style['occupation']}
             type="text"
-            onChange={onFieldNameChange}
+            name='occupation'
+            onChange={e => {onFieldNameChange("name", e.target.value)}}
             value={occupation}
             required
             />
@@ -78,7 +76,8 @@ const Signup = (props) => {
             placeholder='Enter closest major city to where you reside'
             className={style['location']}
             type="text"
-            onChange={onFieldNameChange}
+            name='location'
+            onChange={e => {onFieldNameChange("name", e.target.value)}}
             value={city}
             />
             <div>
@@ -86,7 +85,7 @@ const Signup = (props) => {
                 <span>Upload a default profile image</span>
                 <input 
                 type="file"
-                onChange={handlePicture}
+                onChange={e => {onFieldNameChange("name", e.target.value)}}
                 />
               </div>
               <div>
